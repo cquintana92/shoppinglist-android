@@ -1,0 +1,14 @@
+stages:
+  - build
+
+build:apk:
+  stage: build
+  image: thyrlian/android-sdk:latest
+  only:
+    - tags
+  script:
+    - echo "$KEYSTORE_BASE64" | base64 -d > shoppinglist.keystore
+    - make compile_release
+  artifacts:
+    paths:
+      - app/build/outputs/apk/release/

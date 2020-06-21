@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/action_clear_checked"
+        android:icon="@drawable/ic_baseline_delete_sweep_24"
+        android:title="@string/clear_checked"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/action_toggle_night_mode"
+        android:icon="@drawable/ic_baseline_brightness_medium_24"
+        android:title="@string/modo_claro_oscuro"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_configure_base_url"
+        android:icon="@drawable/ic_baseline_settings_24"
+        android:title="@string/configure_base_url_title"
+        app:showAsAction="ifRoom" />
+</menu>

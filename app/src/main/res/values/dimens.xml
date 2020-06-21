@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+    <dimen name="padding_xs">4dp</dimen>
+    <dimen name="padding_s">8dp</dimen>
+    <dimen name="padding_m">12dp</dimen>
+    <dimen name="padding_l">16dp</dimen>
+
+    <dimen name="dialog_edittext_margin">16dp</dimen>
+</resources>

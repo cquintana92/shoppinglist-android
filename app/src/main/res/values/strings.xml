@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name" translatable="false">ShoppingList</string>
+    <string name="base_url_hint" translatable="false">https://yourserver.com</string>
+
+    <string name="new_element_dialog_title">New element</string>
+    <string name="new_element_dialog_confirm">Add</string>
+    <string name="new_element_dialog_cancel">Cancel</string>
+    <string name="new_element_cannot_be_empty">Name cannot be empty</string>
+    <string name="an_error_has_happened">An error has happened</string>
+    <string name="clear_checked">Remove completed</string>
+    <string name="modo_claro_oscuro">Light/Dark mode</string>
+    <string name="base_url_not_configured">You must configure the server URL</string>
+    <string name="base_url_dialog_title">Server URL</string>
+    <string name="configure_base_url_title">Configure server URL</string>
+
+</resources>
