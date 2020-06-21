@@ -4,6 +4,8 @@ plugins {
     id(BuildPlugins.kotlinAndroidExtensions)
 }
 
+val env = System.getenv()
+
 android {
     compileSdkVersion(AndroidSdk.compile)
     buildToolsVersion = AndroidSdk.buildTools
@@ -20,10 +22,10 @@ android {
 
     signingConfigs {
         create("release") {
-            storeFile = file("../shoppinglist.keystore")
-            storePassword = System.getenv("KEYSTORE_PASSWORD")
-            keyAlias = System.getenv("KEYSTORE_ALIAS")
-            keyPassword = System.getenv("KEYSTORE_KEY_PASSWORD")
+            storeFile = file("${rootDir.canonicalPath}/shoppinglist.keystore")
+            storePassword = env["KEYSTORE_PASSWORD"]
+            keyAlias = env["KEYSTORE_ALIAS"]
+            keyPassword = env["KEYSTORE_KEY_PASSWORD"]
         }
     }
 

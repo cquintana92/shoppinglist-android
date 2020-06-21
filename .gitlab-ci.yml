@@ -9,7 +9,7 @@ build:apk:
   script:
     - apt-get update && apt-get install -y file make
     - echo "$KEYSTORE_BASE64" | base64 -d > shoppinglist.keystore
-    - make compile_release
+    - ./gradlew assembleRelease
   artifacts:
     paths:
       - app/build/outputs/apk/release/
