@@ -1,6 +1,7 @@
 package dev.cquintana.shoppinglist
 
 import android.content.Context
+import android.content.DialogInterface
 import android.content.res.Configuration
 import android.os.Bundle
 import android.text.InputType
@@ -18,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView
 import io.reactivex.rxjava3.core.Observer
 import io.reactivex.rxjava3.disposables.Disposable
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.setup_dialog.*
 import timber.log.Timber
 
 
@@ -182,34 +184,41 @@ class MainActivity : AppCompatActivity(), ShoppingListView, DragListener {
         return super.onOptionsItemSelected(item)
     }
 
-    override fun showSetupServerUrl(initialValue: String, cancelable: Boolean, callback: (String) -> Unit) {
-        val edittext = EditTextExtended(this)
-        edittext.inputType = InputType.TYPE_TEXT_VARIATION_WEB_EDIT_TEXT or InputType.TYPE_TEXT_VARIATION_URI
-        edittext.setText(initialValue)
-        edittext.setHint(R.string.base_url_hint)
+    override fun showSetupServerUrl(initialValue: String, initialBearerValue: String, cancelable: Boolean, callback: (String, String) -> Unit) {
+        val view = layoutInflater.inflate(R.layout.setup_dialog, null, false)
+
+        val server_url_edittext = view.findViewById<EditTextExtended>(R.id.server_url_edittext)
+        server_url_edittext.setText(initialValue)
+
+        val bearer_edittext = view.findViewById<EditTextExtended>(R.id.server_bearer_edittext)
+        bearer_edittext.setText(initialBearerValue)
+
+        val submitCallback = { dialog: DialogInterface ->
+            val urlValue = server_url_edittext.text.toString()
+            val bearerValue = bearer_edittext.text.toString()
+            dialog.dismiss()
+            callback(urlValue, bearerValue)
+        }
 
         val alert = AlertDialog.Builder(this)
             .setCancelable(cancelable)
             .setTitle(R.string.base_url_dialog_title)
-            .setView(edittext)
+            .setView(view)
             .setPositiveButton(R.string.new_element_dialog_confirm) { dialog, _ ->
-                val value = edittext.text.toString()
-                dialog.dismiss()
-                callback(value)
+                submitCallback(dialog)
             }
             .setNegativeButton(R.string.new_element_dialog_cancel) { dialog, _ -> dialog.dismiss() }
 
         val dialog = alert.create()
         dialog.show()
 
-        edittext.onSubmit {
-            val value = edittext.text.toString()
-            dialog.dismiss()
-            callback(value)
+        server_url_edittext.onSubmit {
+            submitCallback(dialog)
         }
 
-        val margin = resources.getDimension(R.dimen.dialog_edittext_margin).toInt()
-        edittext.setMarginExtensionFunction(left = margin, right = margin)
+        bearer_edittext.onSubmit {
+            submitCallback(dialog)
+        }
     }
 
     private fun refresh() {
@@ -248,6 +257,7 @@ class MainActivity : AppCompatActivity(), ShoppingListView, DragListener {
                     Toast.makeText(this, R.string.an_error_has_happened, Toast.LENGTH_SHORT).show()
                 }
             }
+            adapter.setItems(listOf())
         }
     }
 

@@ -28,7 +28,7 @@ interface ShoppingListView {
     fun showRefreshing()
     fun hideRefreshing()
 
-    fun showSetupServerUrl(initialValue: String, cancelable: Boolean, callback: (String) -> Unit)
+    fun showSetupServerUrl(initialValue: String, initialBearerValue: String, cancelable: Boolean, callback: (String, String) -> Unit)
 }
 
 class ShoppingListPresenter(
@@ -172,14 +172,18 @@ class ShoppingListPresenter(
 
     fun onConfigureServerUrlClicked() {
         val storedUrl = preferencesManager.getBaseUrl()
-        val callback = { url: String ->
+        val storedBearer = preferencesManager.getBearer()
+        val callback = { url: String, bearer: String ->
             preferencesManager.setBaseUrl(url)
+            if (bearer.isNotEmpty()) {
+                preferencesManager.setBearer(bearer)
+            }
             getAll()
         }
         if (storedUrl != null) {
-            view?.showSetupServerUrl(storedUrl, true, callback)
+            view?.showSetupServerUrl(storedUrl, storedBearer ?: "", true, callback)
         } else {
-            view?.showSetupServerUrl("", false, callback)
+            view?.showSetupServerUrl("", storedBearer ?: "", false, callback)
         }
     }
 

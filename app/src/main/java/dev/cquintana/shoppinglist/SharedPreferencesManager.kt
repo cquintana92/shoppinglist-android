@@ -11,6 +11,7 @@ class SharedPreferencesManager(context: Context) {
     companion object {
         private val DAY_NIGHT_MODE = "current_night_mode"
         private val BASE_URL = "base_url"
+        private val SECRET_BEARER = "secret_bearer"
 
         val NIGHT_MODE_NO = Configuration.UI_MODE_NIGHT_NO
         val NIGHT_MODE_YES = Configuration.UI_MODE_NIGHT_YES
@@ -27,6 +28,19 @@ class SharedPreferencesManager(context: Context) {
         val url = this.sharedPreferences.getString(BASE_URL, "")
         if (url != "") {
             return url
+        } else {
+            return null
+        }
+    }
+
+    fun setBearer(bearer: String) {
+        this.sharedPreferences.edit().putString(SECRET_BEARER, bearer).apply()
+    }
+
+    fun getBearer(): String? {
+        val bearer = this.sharedPreferences.getString(SECRET_BEARER, "")
+        if (bearer != "") {
+            return bearer
         } else {
             return null
         }

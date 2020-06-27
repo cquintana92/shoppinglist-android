@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="base_url_hint">URL del servidor</string>
+    <string name="server_bearer_hint">Bearer secreto del servidor</string>
+
     <string name="new_element_dialog_title">Nuevo elemento</string>
     <string name="new_element_dialog_confirm">Añadir</string>
     <string name="new_element_dialog_cancel">Cancelar</string>
@@ -8,6 +11,6 @@
     <string name="an_error_has_happened">Ha ocurrido un error</string>
     <string name="modo_claro_oscuro">Modo claro/oscuro</string>
     <string name="base_url_not_configured">Debes configurar la URL del servidor</string>
-    <string name="base_url_dialog_title">URL del servidor</string>
+    <string name="base_url_dialog_title">Configuración del servidor</string>
     <string name="configure_base_url_title">Configurar URL del servidor</string>
 </resources>

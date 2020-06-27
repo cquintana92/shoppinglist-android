@@ -18,9 +18,15 @@ class HostSelectionInterceptor(val preferencesManager: SharedPreferencesManager)
                     .host(parsed.host)
                     .port(parsed.port)
 
-                request = request.newBuilder()
+                var newBuilder = request.newBuilder()
                     .url(newUrl.build())
-                    .build()
+
+                val bearer = preferencesManager.getBearer()
+                if (bearer != null) {
+                    newBuilder = newBuilder.addHeader("Authorization", "Bearer $bearer")
+                }
+
+                request = newBuilder.build()
             }
         }
 
