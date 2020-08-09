@@ -13,4 +13,5 @@
     <string name="base_url_not_configured">Debes configurar la URL del servidor</string>
     <string name="base_url_dialog_title">Configuración del servidor</string>
     <string name="configure_base_url_title">Configurar URL del servidor</string>
+    <string name="item_already_exists">El elemento ya está en la lista</string>
 </resources>

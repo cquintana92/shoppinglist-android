@@ -4,12 +4,33 @@ import io.reactivex.rxjava3.core.Single
 
 class ShoppingListInteractor(val service: ShoppingListService) {
 
-    fun getAll(): Single<List<ShoppingListItem>> {
-        return service.getAll()
+    companion object {
+        const val HTTP_DUPLICATED_STATUS_CODE = 409
     }
 
-    fun createNew(name: String): Single<List<ShoppingListItem>> {
+    fun getAll(): Single<Result> {
+        return service.getAll()
+            .map {
+                Result.withState(it)
+            }
+            .onErrorReturn {
+                Result.withError(Error.IOError(it.message ?: ""))
+            }
+    }
+
+    fun createNew(name: String): Single<Result> {
         return service.createNew(NewShoppingListRequest(name))
+            .map {
+                if (it.isSuccessful) {
+                    Result.withState(it.body()!!)
+                } else {
+                    if (it.code() == HTTP_DUPLICATED_STATUS_CODE) {
+                        Result.withError(Error.ItemAlreadyExists)
+                    } else {
+                        Result.withError(Error.IOError(it.errorBody().toString()))
+                    }
+                }
+            }
     }
 
     fun toggleChecked(id: Int): Single<List<ShoppingListItem>> {

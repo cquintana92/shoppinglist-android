@@ -252,6 +252,10 @@ class MainActivity : AppCompatActivity(), ShoppingListView, DragListener {
             when (val error = t.error!!) {
                 is Error.BaseUrlNotConfigured ->
                     Toast.makeText(this, R.string.base_url_not_configured, Toast.LENGTH_LONG).show()
+                is Error.ItemAlreadyExists -> {
+                    Toast.makeText(this, R.string.item_already_exists, Toast.LENGTH_LONG).show()
+                    this.refresh()
+                }
                 is Error.IOError -> {
                     Timber.e(error.message, "IOError")
                     Toast.makeText(this, R.string.an_error_has_happened, Toast.LENGTH_SHORT).show()

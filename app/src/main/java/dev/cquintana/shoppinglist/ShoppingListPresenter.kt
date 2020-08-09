@@ -4,9 +4,11 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observer
 import io.reactivex.rxjava3.schedulers.Schedulers
 import io.reactivex.rxjava3.subjects.PublishSubject
+import retrofit2.HttpException
 
 sealed class Error {
     object BaseUrlNotConfigured: Error()
+    object ItemAlreadyExists: Error()
     data class IOError(val message: String): Error()
 }
 
@@ -52,7 +54,7 @@ class ShoppingListPresenter(
                 .subscribe(
                     {
                         view?.hideRefreshing()
-                        producer.onNext(Result.withState(it))
+                        producer.onNext(it)
                     },
                     {
                         view?.hideRefreshing()
@@ -70,7 +72,7 @@ class ShoppingListPresenter(
                 .subscribe(
                     {
                         view?.hideRefreshing()
-                        producer.onNext(Result.withState(it))
+                        producer.onNext(it)
                     },
                     {
                         view?.hideRefreshing()
