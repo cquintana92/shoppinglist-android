@@ -2,12 +2,12 @@
 
 This repository contains the Android client for the ShoppingList.
 
-Link to the ShoppingList server repository: https://gitlab.com/cquintana92/shoppinglist-server
+Link to the ShoppingList server repository: https://github.com/cquintana92/shoppinglist-server
 
 ## 1. How to get
 ### 1.1. Download a generated APK
 
-You can go to the [releases section of this project](https://gitlab.com/cquintana92/shoppinglist-android/-/releases) and download the generated APK.
+You can go to the [releases section of this project](https://github.com/cquintana92/shoppinglist-android/releases) and download the generated APK.
 
 ### 1.2. Build from source
 
@@ -22,7 +22,7 @@ The generated APK will be located at `app/build/outputs/apk/release/`.
 
 ## 2. How to use
 
-The first time you start the application you will need to set the server URL and Bearer to the [ShoppingList server](https://gitlab.com/cquintana92/shoppinglist-server). You can change it any time you want.
+The first time you start the application you will need to set the server URL and Bearer to the [ShoppingList server](https://github.com/cquintana92/shoppinglist-server). You can change it any time you want.
 
 ### 2.1. Adding new elements
 
